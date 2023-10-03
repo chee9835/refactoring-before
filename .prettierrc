@@ -1,6 +1,7 @@
-  "editor.tabSize": 2,
-  "prettier.tabWidth": 2,
-  "prettier.singleQuote": true,
-  "prettier.bracketSpacing": true,
-  "prettier.arrowParens": "avoid",
-  "prettier.endOfLine": "auto",
+{
+  "tabSize": 2,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "arrowParens": "avoid",
+  "endOfLine": "auto"
+}
