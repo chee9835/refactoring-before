@@ -1,33 +1,30 @@
 export class Account {
+  #type;
+  #daysOverdrawn;
   constructor(accountType, daysOverdrawn) {
-    this.type = accountType;
-    this._daysOverdrawn = daysOverdrawn;
-  }
-
-  get bankCharge() {
-    let result = 4.5;
-    if (this._daysOverdrawn > 0) result += this.overdraftCharge;
-    return result;
-  }
-
-  get overdraftCharge() {
-    if (this.type.isPremium) {
-      const baseCharge = 10;
-      if (this._daysOverdrawn <= 7) return baseCharge;
-      else return baseCharge + (this._daysOverdrawn - 7) * 0.85;
-    } else return this._daysOverdrawn * 1.75;
+    this.#type = accountType;
+    this.#daysOverdrawn = daysOverdrawn;
   }
 
   get daysOverdrawn() {
-    return this._daysOverdrawn;
+    return this.#daysOverdrawn;
   }
-}
 
-export class AccountType {
-  constructor(type) {
-    this._type = type;
-  }
   get isPremium() {
-    return this._type === 'Premium';
+    return this.#type === 'Premium';
+  }
+
+  get bankCharge() {
+    return this.daysOverdrawn > 0 ? result + this.overdraftCharge : result;
+  }
+
+  get overdraftCharge() {
+    if (!this.isPremium) {
+      return this.daysOverdrawn * 1.75;
+    }
+    const baseCharge = 10;
+    return this.daysOverdrawn <= 7
+      ? baseCharge
+      : baseCharge + (this.daysOverdrawn - 7) * 0.85;
   }
 }
