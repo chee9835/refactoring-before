@@ -1,12 +1,12 @@
-class Organization {
+class Enterprise {
   constructor(data) {
     this._name = data.name;
     this._country = data.country;
   }
-  get name() {
+  get title() {
     return this._name;
   }
-  set name(value) {
+  set title(value) {
     this._name = value;
   }
   get country() {
@@ -16,7 +16,7 @@ class Organization {
     this._country = value;
   }
 }
-const organization = new Organization({
+const enterprise = new Enterprise({
   name: '드림코딩',
   country: '대한민국',
 });
