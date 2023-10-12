@@ -23,7 +23,7 @@ class Person {
   }
 
   set officeAreaCode(value) {
-    this.#telephoneNumber.areaCode = value;
+    this.#telephoneNumber = new TelephoneNumber(value, this.telephoneNumber);
   }
 
   get officeNumber() {
@@ -31,7 +31,7 @@ class Person {
   }
 
   set officeNumber(value) {
-    this.#telephoneNumber.number = value;
+    this.#telephoneNumber = new TelephoneNumber(this.officeAreaCode, value);
   }
 }
 
