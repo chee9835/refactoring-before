@@ -1,26 +1,53 @@
 class Employee {
   #name;
-  #type;
-  constructor(name, type) {
-    this.validateType(type);
+  constructor(name) {
     this.#name = name;
-    this.#type = type;
   }
 
-  validateType(arg) {
-    if (!['engineer', 'manager', 'salesperson'].includes(arg)) {
-      throw new Error(`${arg}라는 직원 유형은 없습니다.`);
-    }
+  get name() {
+    return this.#name;
   }
 
   get type() {
-    return this.#type;
+    return 'employee';
   }
 
   toString() {
     return `${this.#name} (${this.type})`;
   }
+
+  // 팩토리 메서드
+  static createEmployee(type) {
+    switch (type) {
+      case 'engineer':
+        return new Engineer();
+      case 'salesperson':
+        return new Salesperson();
+      case 'manager':
+        return new Manager();
+      default:
+        throw new Error(`${type}라는 직원 유형은 없습니다.`);
+    }
+  }
 }
 
-const ellie = new Employee('엘리', 'engineer');
-const bob = new Employee('밥', 'manager');
+class Engineer extends Employee {
+  get type() {
+    return 'engineer';
+  }
+}
+
+class Salesperson extends Employee {
+  get type() {
+    return 'salesperson';
+  }
+}
+
+class Manager extends Employee {
+  get type() {
+    return 'manager';
+  }
+}
+
+const ellie = new Engineer('엘리');
+const bob = new Manager('밥');
